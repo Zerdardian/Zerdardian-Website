@@ -1,5 +1,0 @@
-<Files "*.json">
-Order Allow,Deny
-Allow from 127.0.0.1
-Deny from all
-</Files>
