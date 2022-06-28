@@ -1,6 +1,12 @@
 <?php
 if(empty($error)) {
     if(isset($_GET['page'])) {
+        if(isset($_POST)) {
+            $file = "$base"."assets/post/$GETpage.php";
+            if(file_exists($file)) {
+                include_once $file;
+            }
+        }
         $file = "$base"."assets/pages/$GETpage.php";
         if(file_exists($file)) {
             include_once $file;
