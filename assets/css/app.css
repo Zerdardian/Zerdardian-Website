@@ -1,0 +1,107 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: #b3ff00;
+}
+body div#background {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+body div#background div.senna div.slope div.item {
+  width: 100%;
+  height: 100%;
+}
+body div#background div.senna div.slope div.slope4 {
+  -webkit-clip-path: polygon(82% 86%, 41% 87%, 40% 92%, 41% 100%, 82% 88%);
+          clip-path: polygon(82% 86%, 41% 87%, 40% 92%, 41% 100%, 82% 88%);
+}
+body div#background div.senna div.slope div.black {
+  background-color: black;
+}
+body div#background div.senna div.slope div.white {
+  background-color: white;
+}
+body div#main {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}
+body div#main header#header {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  margin-bottom: 10px;
+}
+body div#main header#header h1 {
+  padding-left: 10px;
+}
+body div#main header#header div#headermenu div#headermenubutton {
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 30px;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+}
+body div#main header#header div#headermenu div#headermenubutton div.strokes {
+  display: block;
+  width: 100%;
+  height: 15px;
+  background-color: black;
+  transition: 0.5s;
+}
+body div#main header#header div#headermenu div#headermenubutton div.strokes.first {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body div#main header#header div#headermenu div#headermenubutton div.strokes.second {
+  display: block;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  opacity: 1;
+}
+body div#main header#header div#headermenu div#headermenubutton div.strokes.third {
+  position: absolute;
+  top: 80px;
+  left: 0;
+}
+body div#main header#header div#headermenu div#headermenubutton:hover div.strokes.second {
+  position: absolute;
+  transform: rotate(-40deg);
+  width: 120%;
+  left: -10px;
+  border-radius: 20px;
+}
+body div#main header#header div#headermenu.activemenu div#headermenubutton div.strokes {
+  border-radius: 20px;
+}
+body div#main header#header div#headermenu.activemenu div#headermenubutton div.strokes.first {
+  transform: rotate(45deg);
+  margin-top: 40px;
+}
+body div#main header#header div#headermenu.activemenu div#headermenubutton div.strokes.third {
+  transform: rotate(-45deg);
+  margin-top: -40px;
+}
+body div#main header#header div#headermenu.activemenu div#headermenubutton div.strokes.second {
+  opacity: 0 !important;
+}
+body div#main header#header div#headermenu.activemenu div#headermenuitems {
+  z-index: 1;
+  position: absolute;
+  top: -21px;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #89c400;
+}/*# sourceMappingURL=app.css.map */
