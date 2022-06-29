@@ -1,0 +1,164 @@
+body {
+    div#main {
+        header#header {
+            width: 100%;
+            z-index: 100;
+        
+            position: relative;
+        
+            div#headermenu {
+                div#headermenubutton {
+                    position: absolute;
+                    display: block;
+                    top: 20px;
+                    right: 30px;
+                    width: 100px;
+                    height: 100px;
+                    z-index: 5;
+        
+                    div.strokes {
+                        display: block;
+                        width: 100%;
+                        height: 15px;
+                        background-color: black;
+                        transition: 0.5s;
+                    }
+        
+                    div.strokes.first {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+        
+                    div.strokes.second {
+                        display: block;
+                        position: absolute;
+                        top: 40px;
+                        left: 0;
+                        opacity: 1;
+                    }
+        
+                    div.strokes.third {
+                        position: absolute;
+                        top: 80px;
+                        left: 0;
+                    }
+        
+                    &:hover {
+                        div.strokes.second {
+                            position: absolute;
+        
+                            transform: rotate(-40deg);
+                            width: 120%;
+                            left: -10px;
+                            border-radius: 20px;
+                        }
+                    }
+        
+                }
+        
+                div#headermenuitems {
+                    opacity: 1;
+                    z-index: 5;
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    right: 0;
+                    width: 0px;
+                    background-color: $color--alt;
+                    transition: 0.5s;
+                    a {
+                        text-decoration: none;
+                        color: white;
+                    }
+                    .item {
+                        width: 100%;
+                        padding-top: 5px;
+                        height: 20px;
+                        text-align: center;
+                        display: none;
+                        transition: 0.3s;
+                        z-index: 5;
+                        &:hover {
+                            padding-top: 10px;
+                            color: black;
+                            height: 40px;
+                        }
+                    }
+        
+                    #hhomeitem {
+                        margin-top: 150px;
+                    }
+                }
+        
+                &.activemenu {
+                    div#headermenubutton {
+                        div.strokes {
+                            border-radius: 20px;
+                        }
+        
+                        div.strokes.first {
+                            transform: rotate(45deg);
+                            margin-top: 40px;
+                        }
+        
+                        div.strokes.third {
+                            transform: rotate(-45deg);
+                            margin-top: -40px;
+                        }
+        
+                        div.strokes.second {
+                            opacity: 0 !important;
+                        }
+                    }
+        
+                    div#headermenuitems {
+                        opacity: 1;
+                        z-index: 1;
+                        width: 250px;
+                        height: 400px;
+                        border-bottom-left-radius: 20px;
+                        background-color: $color--alt;
+        
+                        .item.active {
+                            display: block;
+                        }
+        
+                        .item#haccountitem {
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            height: 70px;
+        
+                            .image {
+                                width: 80px;
+                                height: 80px;
+                                position: absolute;
+                                bottom: -10px;
+                                left: -30px;
+        
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: 30%;
+                                }
+                            }
+        
+                            .text {
+                                padding-left: 10px;
+                                transition: 0.2s;
+                                &.hlogout:hover {
+                                    padding-top: 10px;
+                                }
+                            }
+                            &:hover {
+                                padding-top: 0;
+                                height: 70px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

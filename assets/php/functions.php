@@ -16,6 +16,51 @@ function insertPageName(string $page, string $type)
     if (empty($type)) return;
 }
 
+/**
+ * Return a form code for savety and security.
+ * @param string $type "Give type of form"
+ * @param bool $yesno "If you prefer it in the session to be reloaded"
+ */
+function formcode(string $type, bool $yesno) {
+    try {
+        $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        $error['code'] = 404;
+        $error['type'] = "UNKWN_USR";
+        $error['msg'] = $e->getMessage();
+    }
+
+    if(isset($error)) return $error;
+
+    
+}
+
+/**
+	 * Get either a Gravatar URL or complete image tag for a specified email address.
+	 *
+	 * @param string $email The email address
+	 * @param string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
+	 * @param string $d Default imageset to use [ 404 | mp | identicon | monsterid | wavatar ]
+	 * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
+	 * @param boole $img True to return a complete IMG tag False for just the URL
+	 * @param array $atts Optional, additional key/value attributes to include in the IMG tag
+	 * @return String containing either just a URL or a complete image tag
+	 * @source https://gravatar.com/site/implement/images/php/
+	 */
+	function get_gravatar( $email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() ) {
+		$url = 'https://www.gravatar.com/avatar/';
+		$url .= md5( strtolower( trim( $email ) ) );
+		$url .= "?s=$s&d=$d&r=$r";
+		if ( $img ) {
+			$url = '<img src="' . $url . '"';
+			foreach ( $atts as $key => $val )
+				$url .= ' ' . $key . '="' . $val . '"';
+			$url .= ' />';
+		}
+		return $url;
+	}
+
 // League of Legends
 
 /**
@@ -26,6 +71,7 @@ function insertPageName(string $page, string $type)
  */
 function InsertLeagueUsername(string $username) # Finished, Adding user to database or updating the user if requested!
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -88,6 +134,7 @@ function InsertLeagueUsername(string $username) # Finished, Adding user to datab
  */
 function InsertLeaguePuuId(string $puuid) # Finished and mostly copied over from Username. Same deal as before
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -149,6 +196,8 @@ function InsertLeaguePuuId(string $puuid) # Finished and mostly copied over from
 
 function insertLeagueMatch(string $puuid, int $max) # Finished, loading Player info and match info if required!
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
+
     // Db connection
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
@@ -271,6 +320,8 @@ function insertLeagueMatch(string $puuid, int $max) # Finished, loading Player i
  */
 function insertMasteryChampions(string $encSumid)
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
+
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -316,6 +367,8 @@ function insertMasteryChampions(string $encSumid)
  */
 function getLeagueUser(string $username) # Finished, Select user from Database.
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
+
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -364,6 +417,8 @@ function getLeagueUser(string $username) # Finished, Select user from Database.
  */
 function getLeaguePuuid(string $puuid) # Finished, Select user from Database otherwise, create
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
+
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -411,6 +466,8 @@ function getLeaguePuuid(string $puuid) # Finished, Select user from Database oth
  */
 function getMasteryChampions(string $encSumid)
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
+
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -438,6 +495,8 @@ function getMasteryChampions(string $encSumid)
 // Select all the champions that League has and future champions as well!
 function selectAllChampions()
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
+
     $versions = json_decode(file_get_contents("https://ddragon.leagueoflegends.com/api/versions.json"));
     $version = $versions[0];
     $context = stream_context_create(['http' => ['ignore_errors' => true]]);
@@ -464,6 +523,8 @@ function selectAllChampions()
  */
 function getMasteryChampion(string $encSumid, int $championid)
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
+
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -488,6 +549,8 @@ function getMasteryChampion(string $encSumid, int $championid)
 
 function getRankUser($encSumid)
 {
+    if(empty($_ENV['RIOT_APIKEY'])) return;
+
     $region = 'euw1';
     if (empty($encSumid)) return;
 

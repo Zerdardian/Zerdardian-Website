@@ -1,3 +1,11 @@
+<?php
+if (!empty($_SESSION['user']['acc'])) {
+    $username = $_SESSION['user']['acc']['username'];
+    $userid = $_SESSION['user']['acc']['userid'];
+    $email = $_SESSION['user']['acc']['email'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,30 +22,8 @@
 </head>
 
 <body>
-    <div id="background">
-        <div class="backgroundimage"></div>
-        <div class="senna">
-            <div class="sennagun">
-                <div class="slope">
-                    <div class="item slope1 black"></div>
-                    <div class="item slope2 black"></div>
-                    <div class="item slope3 black"></div>
-                    <div class="item slope4 white"></div>
-                    <div class="item slope5 white"></div>
-                    <div class="item slope6 white"></div>
-                </div>
-                <div class="handle"></div>
-            </div>
-        </div>
-    </div>
     <div id="main">
         <header id="header">
-            <div id="headerdata">
-                <div class="logo"></div>
-                <div class="text">
-                    <h1>Zerdardian</h1>
-                </div>
-            </div>
             <div id="headermenu">
                 <div id="headermenubutton">
                     <div class="strokes first"></div>
@@ -45,8 +31,67 @@
                     <div class="strokes third"></div>
                 </div>
                 <div id="headermenuitems">
-                    <div class="item"></div>
+                    <a href="/">
+                        <div class="item" id="hhomeitem">
+                            Home
+                        </div>
+                    </a>
+                    <a href="/aboutme">
+                        <div class="item" id="haboutmeitem">
+                            About me
+                        </div>
+                    </a>
+                    <a href="/portofolio">
+                        <div class="item" id="hportofolioitem">
+                            Portofolio
+                        </div>
+                    </a>
+                    <a href="/blog">
+                        <div class="item" id="hblogitem">
+                            Blog
+                        </div>
+                    </a>
+                    <div class="item" id="haccountitem">
+                        <?php
+                        if (empty($_SESSION['user']['acc'])) {
+                        ?>
+                            <a href="/login">
+                                <div class="hlogin item">
+                                    Login
+                                </div>
+                            </a>
+                            <a href="/register">
+                                <div class="hregister item">
+                                    Register
+                                </div>
+                            </a>
+                        <?php
+                        }
+
+                        if (!empty($_SESSION['user']['acc'])) {
+                        ?>
+                            <a href="/user/<?= $username ?>/">
+                                <div class="image">
+                                    <img src="http://ddragon.leagueoflegends.com/cdn/12.12.1/img/profileicon/588.png" alt="Profile Icon">
+                                </div>
+                            </a>
+
+                            <a href="/user/<?= $username ?>/">
+                                <div class="husername text">
+                                    <?= ucfirst($username) ?>
+                                </div>
+                            </a>
+                            <a href="/logout">
+                                <div class="hlogout text">
+                                    Log out
+                                </div>
+                            </a>
+                        <?php
+                        }
+                        ?>
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </header>
         <div id="container">

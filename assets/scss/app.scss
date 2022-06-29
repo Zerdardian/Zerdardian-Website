@@ -1,0 +1,49 @@
+$color--main: rgb(96, 96, 96);
+$color--main50: rgba(96, 96, 96, 0.5);
+$color--alt: rgb(144, 127, 127);
+$color--altalt: rgb(255, 255, 255);
+$color--maintext: rgb(0, 0, 0);
+$color--alttext: "";
+$color--altalttext: "";
+
+@import "header";
+@import "basis";
+@import "mainpage";
+@import "footer";
+@import "account";
+
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: $color--main;
+
+    div#main {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        overflow: auto;
+        div.mainpage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+@keyframes DisplayItems {
+    0% {
+        opacity: 0;
+        display: block;
+    }
+
+    100% {
+        opacity: 1;
+        display: block;
+    }
+}

@@ -4,18 +4,18 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
 
-RewriteRule ^aboutme/ ?page=about
-RewriteRule ^user ?page=user
-RewriteRule ^user/ ?page=user
-RewriteRule ^user/(.*) ?page=user&username=$1
-RewriteRule ^user/(.*)/ ?page=user&username=$1
-RewriteRule ^login ?page=login
-RewriteRule ^login/ ?page=login
-RewriteRule ^register ?page=register
-RewriteRule ^register/ ?page=register
-RewriteRule ^blog/(.*) ?page=blog&blogname=$1
-RewriteRule ^blog/(.*)/ ?page=blog&blogname=$1
+RewriteRule ^([^/]+)/?$ index.php?one=$1 [L,QSA]
+RewriteRule ^([^/]+)/([^/]+)/?$ index.php?one=$1&two=$2 [L,QSA]
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ index.php?one=$1&two=$2&three=$3 [L,QSA]
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?one=$1&two=$2&three=$3&four=$4 [L,QSA]
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?one=$1&two=$2&three=$3&four=$4&five=$5 [L,QSA]
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?one=$1&two=$2&three=$3&four=$4&five=$5&six=$6 [L,QSA]
+
 
 <Files .htaccess>
 order allow,deny

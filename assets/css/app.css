@@ -1,55 +1,16 @@
-body {
-  padding: 0;
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-  background-color: #b3ff00;
-}
-body div#background {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-body div#background div.senna div.slope div.item {
-  width: 100%;
-  height: 100%;
-}
-body div#background div.senna div.slope div.slope4 {
-  -webkit-clip-path: polygon(82% 86%, 41% 87%, 40% 92%, 41% 100%, 82% 88%);
-          clip-path: polygon(82% 86%, 41% 87%, 40% 92%, 41% 100%, 82% 88%);
-}
-body div#background div.senna div.slope div.black {
-  background-color: black;
-}
-body div#background div.senna div.slope div.white {
-  background-color: white;
-}
-body div#main {
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: auto;
-}
 body div#main header#header {
   width: 100%;
-  height: 60px;
+  z-index: 100;
   position: relative;
-  margin-bottom: 10px;
-}
-body div#main header#header h1 {
-  padding-left: 10px;
 }
 body div#main header#header div#headermenu div#headermenubutton {
   position: absolute;
   display: block;
-  top: 0;
+  top: 20px;
   right: 30px;
   width: 100px;
   height: 100px;
-  z-index: 10;
+  z-index: 5;
 }
 body div#main header#header div#headermenu div#headermenubutton div.strokes {
   display: block;
@@ -82,6 +43,38 @@ body div#main header#header div#headermenu div#headermenubutton:hover div.stroke
   left: -10px;
   border-radius: 20px;
 }
+body div#main header#header div#headermenu div#headermenuitems {
+  opacity: 1;
+  z-index: 5;
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  width: 0px;
+  background-color: rgb(144, 127, 127);
+  transition: 0.5s;
+}
+body div#main header#header div#headermenu div#headermenuitems a {
+  text-decoration: none;
+  color: white;
+}
+body div#main header#header div#headermenu div#headermenuitems .item {
+  width: 100%;
+  padding-top: 5px;
+  height: 20px;
+  text-align: center;
+  display: none;
+  transition: 0.3s;
+  z-index: 5;
+}
+body div#main header#header div#headermenu div#headermenuitems .item:hover {
+  padding-top: 10px;
+  color: black;
+  height: 40px;
+}
+body div#main header#header div#headermenu div#headermenuitems #hhomeitem {
+  margin-top: 150px;
+}
 body div#main header#header div#headermenu.activemenu div#headermenubutton div.strokes {
   border-radius: 20px;
 }
@@ -97,11 +90,228 @@ body div#main header#header div#headermenu.activemenu div#headermenubutton div.s
   opacity: 0 !important;
 }
 body div#main header#header div#headermenu.activemenu div#headermenuitems {
+  opacity: 1;
   z-index: 1;
-  position: absolute;
-  top: -21px;
-  right: 0;
   width: 250px;
-  height: 100vh;
-  background-color: #89c400;
+  height: 400px;
+  border-bottom-left-radius: 20px;
+  background-color: rgb(144, 127, 127);
+}
+body div#main header#header div#headermenu.activemenu div#headermenuitems .item.active {
+  display: block;
+}
+body div#main header#header div#headermenu.activemenu div#headermenuitems .item#haccountitem {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+}
+body div#main header#header div#headermenu.activemenu div#headermenuitems .item#haccountitem .image {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  bottom: -10px;
+  left: -30px;
+}
+body div#main header#header div#headermenu.activemenu div#headermenuitems .item#haccountitem .image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 30%;
+}
+body div#main header#header div#headermenu.activemenu div#headermenuitems .item#haccountitem .text {
+  padding-left: 10px;
+  transition: 0.2s;
+}
+body div#main header#header div#headermenu.activemenu div#headermenuitems .item#haccountitem .text.hlogout:hover {
+  padding-top: 10px;
+}
+body div#main header#header div#headermenu.activemenu div#headermenuitems .item#haccountitem:hover {
+  padding-top: 0;
+  height: 70px;
+}
+
+body .active {
+  display: block;
+  opacity: 1;
+}
+body .opp1 {
+  opacity: 1;
+}
+body .opp05 {
+  opacity: 0.5;
+}
+body .opp0 {
+  opacity: 0;
+}
+body .displayblock .block {
+  display: flex;
+  position: relative;
+  width: 80%;
+  min-height: 120px;
+  background-color: white;
+  color: black;
+}
+body .displayblock .block.row {
+  flex-direction: row;
+  flex-flow: row;
+}
+body .displayblock .block.col {
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-basis: 2;
+  flex-flow: column;
+}
+
+#main .mainpage div.main#headerpage {
+  position: relative;
+}
+#main .mainpage div.main#headerpage .headeritem {
+  width: 100%;
+  height: 600px;
+}
+#main .mainpage div.main#headerpage .headeritem.shape1 {
+  -webkit-clip-path: polygon(0% 100%, 20% 24%, 79% 24%, 100% 0%, 0% 0%);
+          clip-path: polygon(0% 100%, 20% 24%, 79% 24%, 100% 0%, 0% 0%);
+  background-color: rgb(255, 165, 74);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+#main .mainpage div.main#headerpage .headeritem.shape2 {
+  -webkit-clip-path: polygon(100% 0%, 95% 36%, 39% 36%, 0% 100%, 0% 0%);
+          clip-path: polygon(100% 0%, 95% 36%, 39% 36%, 0% 100%, 0% 0%);
+  background-color: rgb(136, 255, 120);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+#main .mainpage div.main#headerpage .headeritem.shape3 {
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 66%, 45% 66%, 0% 99%, 0 40%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 66%, 45% 66%, 0% 99%, 0 40%);
+  background-color: rgb(255, 252, 94);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  height: 800px;
+}
+#main .mainpage div.main#headerpage .headeritem.mainheader div.image {
+  position: absolute;
+  bottom: 67px;
+  right: 0;
+  z-index: 4;
+}
+#main .mainpage div.main#headerpage .headeritem.mainheader div.image img {
+  width: 700px;
+}
+
+body div#main div.account {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+body div#main div.account #error {
+  width: 75%;
+  min-height: 20px;
+  margin: auto auto;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: red;
+  color: white;
+  border-radius: 20px;
+  box-shadow: black 10px 10px;
+}
+body div#main div.account #error .mainmessage {
+  padding-bottom: 5px;
+}
+body div#main div.account #error .message {
+  padding-bottom: 5px;
+}
+body div#main div.account div#mainarea {
+  width: 75%;
+  height: 500px;
+  margin-top: 50px;
+  padding-top: 10px;
+  background-color: white;
+  margin: auto auto;
+  border-radius: 20px;
+}
+body div#main div.account div#mainarea form {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+body div#main div.account div#mainarea form label {
+  padding-top: 10px;
+}
+body div#main div.account div#mainarea form input.forminput {
+  width: 75%;
+  height: 25px;
+  border: none;
+  border-bottom: 1px solid black;
+  margin: auto auto;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  transition: 0.3s;
+}
+body div#main div.account div#mainarea form input.forminput:hover {
+  border-bottom: 3px solid black;
+  box-shadow: rgba(0, 0, 0, 0.2) 10px 10px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+body div#main div.account div#mainarea form input.formbutton {
+  width: 50%;
+  height: 50px;
+  margin: auto auto;
+  margin-top: 15px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: rgb(96, 96, 96);
+}
+body div#main {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}
+body div#main div.mainpage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@-webkit-keyframes DisplayItems {
+  0% {
+    opacity: 0;
+    display: block;
+  }
+  100% {
+    opacity: 1;
+    display: block;
+  }
+}
+
+@keyframes DisplayItems {
+  0% {
+    opacity: 0;
+    display: block;
+  }
+  100% {
+    opacity: 1;
+    display: block;
+  }
 }/*# sourceMappingURL=app.css.map */

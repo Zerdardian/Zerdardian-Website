@@ -1,0 +1,40 @@
+body {
+    .active {
+        display: block;
+        opacity: 1;
+    }
+
+    .opp1 {
+        opacity: 1;
+    }
+
+    .opp05 {
+        opacity: 0.5;
+    }
+
+    .opp0 {
+        opacity: 0;
+    }
+
+    .displayblock {
+        .block {
+            display: flex;
+            position: relative;
+            width: 80%;
+            min-height: 120px;
+
+            background-color: white;
+            color: black;
+            &.row {
+                flex-direction: row;
+                flex-flow: row;
+            }
+            &.col {
+                flex-direction: column;
+                flex-wrap: wrap;
+                flex-basis: 2;
+                flex-flow: column;
+            }
+        }
+    }
+}
