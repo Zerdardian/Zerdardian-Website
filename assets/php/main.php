@@ -3,7 +3,12 @@ if (empty($error)) {
     if(!empty($_SESSION['user']['acc'])) {
         $username = $_SESSION['user']['acc']['username'];
         $userid = $_SESSION['user']['acc']['userid'];
-        $email = $_SESSION['user']['acc']['email'];    
+        $email = $_SESSION['user']['acc']['email'];
+        
+        $select = $conn->query("SELECT userid, username, email FROM users WHERE `userid`='$userid'")->fetch();
+        if(empty($select)) {
+            header('location: /logout');
+        }
     }
 
     if (isset($page)) {

@@ -1,11 +1,3 @@
-<?php
-if (!empty($_SESSION['user']['acc'])) {
-    $username = $_SESSION['user']['acc']['username'];
-    $userid = $_SESSION['user']['acc']['userid'];
-    $email = $_SESSION['user']['acc']['email'];
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +9,10 @@ if (!empty($_SESSION['user']['acc'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
     <link rel="stylesheet" type='text/css' href="/assets/css/app.css">
     <title><?= $pagetitle ?></title>
 </head>

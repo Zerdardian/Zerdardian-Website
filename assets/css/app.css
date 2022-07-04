@@ -143,6 +143,19 @@ body .opp05 {
 body .opp0 {
   opacity: 0;
 }
+body button {
+  min-width: 180px;
+  max-width: 300px;
+  min-height: 50px;
+  font-size: 18px;
+  border: none;
+  background-color: rgb(138, 218, 255);
+  color: black;
+  border-radius: 20px;
+}
+body button:hover {
+  background-color: rgb(53, 182, 242);
+}
 body .displayblock .block {
   display: flex;
   position: relative;
@@ -164,15 +177,17 @@ body .displayblock .block.col {
 
 #main .mainpage div.main#headerpage {
   position: relative;
+  height: 600px;
 }
 #main .mainpage div.main#headerpage .headeritem {
+  position: relative;
   width: 100%;
   height: 600px;
 }
 #main .mainpage div.main#headerpage .headeritem.shape1 {
   -webkit-clip-path: polygon(0% 100%, 20% 24%, 79% 24%, 100% 0%, 0% 0%);
           clip-path: polygon(0% 100%, 20% 24%, 79% 24%, 100% 0%, 0% 0%);
-  background-color: rgb(255, 165, 74);
+  background-color: rgb(6, 3, 99);
   position: absolute;
   top: 0;
   left: 0;
@@ -181,7 +196,7 @@ body .displayblock .block.col {
 #main .mainpage div.main#headerpage .headeritem.shape2 {
   -webkit-clip-path: polygon(100% 0%, 95% 36%, 39% 36%, 0% 100%, 0% 0%);
           clip-path: polygon(100% 0%, 95% 36%, 39% 36%, 0% 100%, 0% 0%);
-  background-color: rgb(136, 255, 120);
+  background-color: rgb(14, 90, 166);
   position: absolute;
   top: 0;
   left: 0;
@@ -190,12 +205,22 @@ body .displayblock .block.col {
 #main .mainpage div.main#headerpage .headeritem.shape3 {
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 66%, 45% 66%, 0% 99%, 0 40%);
           clip-path: polygon(0% 0%, 100% 0%, 100% 66%, 45% 66%, 0% 99%, 0 40%);
-  background-color: rgb(255, 252, 94);
+  background-color: rgb(0, 44, 167);
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0;
   height: 800px;
+}
+#main .mainpage div.main#headerpage .headeritem.mainheader .text h1 {
+  position: absolute;
+  left: 160px;
+  top: 150px;
+  z-index: 5;
+  font-size: 4rem;
+  color: white;
+  transform: rotate(-10deg);
+  text-shadow: rgba(0, 0, 0, 0.413) 5px 5px;
 }
 #main .mainpage div.main#headerpage .headeritem.mainheader div.image {
   position: absolute;
@@ -205,6 +230,42 @@ body .displayblock .block.col {
 }
 #main .mainpage div.main#headerpage .headeritem.mainheader div.image img {
   width: 700px;
+}
+#main .mainpage div.main#headerpage .block {
+  width: 100%;
+  min-height: 50px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: -70px;
+}
+#main .mainpage div.main#headerpage .block .item {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+#main .mainpage div.main#headerpage .block .item div.noitem {
+  width: 50%;
+}
+#main .mainpage div.main#headerpage .block .item .text {
+  padding-right: 50px;
+  padding-left: 50px;
+  width: 50%;
+}
+#main .mainpage div.main#headerpage .block .item .text a {
+  text-decoration: none;
+}
+#main .mainpage div.main#headerpage .block .item .image {
+  width: 50%;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+#main .mainpage div.main#headerpage .headerending {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  border-bottom-right-radius: 20px;
 }
 
 body div#main div.account {
@@ -266,11 +327,60 @@ body div#main div.account div#mainarea form input.forminput:hover {
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
 }
+body div#main div.account div#mainarea form input.forminput::-moz-placeholder {
+  text-align: center;
+}
+body div#main div.account div#mainarea form input.forminput:-ms-input-placeholder {
+  text-align: center;
+}
+body div#main div.account div#mainarea form input.forminput::placeholder {
+  text-align: center;
+}
 body div#main div.account div#mainarea form input.formbutton {
   width: 50%;
   height: 50px;
   margin: auto auto;
   margin-top: 15px;
+}
+body div#main div.noacc {
+  width: 75%;
+  position: relative;
+  display: block;
+  margin: auto auto;
+  margin-top: 20px;
+  text-align: end;
+  color: white;
+}
+body div#main div.noacc a {
+  color: rgb(87, 164, 251);
+  text-decoration: none;
+}
+body div#main div.noacc a:hover {
+  color: rgb(0, 119, 255);
+  text-decoration: underline;
+}
+
+div#dashboard.user {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto auto;
+}
+div#dashboard.user div#dashheader {
+  width: 100%;
+  height: 250px;
+  background-color: white;
+}
+div#dashboard.user div.empty.emptyacc, div#dashboard.user div.notfound.error {
+  width: 75%;
+  height: 100%;
+  position: relative;
+  display: block;
+  margin: auto auto;
+  background-color: white;
+  padding: 30px;
+  margin-top: 50px;
+  border-radius: 20px;
 }
 
 body {
@@ -292,6 +402,16 @@ body div#main div.mainpage {
   position: relative;
   width: 100%;
   height: 100%;
+}
+body div.accverified {
+  width: 75%;
+  background-color: white;
+  margin: auto auto;
+  padding: 50px;
+  padding-top: 10px;
+  margin-top: 50px;
+  border-radius: 50px;
+  text-align: center;
 }
 
 @-webkit-keyframes DisplayItems {

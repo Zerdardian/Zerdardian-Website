@@ -69,6 +69,10 @@ body {
                             border-bottom-right-radius: 20px;
                             border-top-right-radius: 20px;
                         }
+
+                        &::placeholder {
+                            text-align: center;
+                        }
                     }
                     
                     input.formbutton {
@@ -77,6 +81,27 @@ body {
                         margin: auto auto;
                         margin-top: 15px;
                     }
+                }
+            }
+        }
+        div.noacc {
+            width: 75%;
+            position: relative;
+            display: block;
+
+            margin: auto auto;
+
+            margin-top: 20px;
+            text-align: end;
+            color: white;
+
+            a {
+                color: rgb(87, 164, 251);
+                text-decoration: none;
+
+                &:hover {
+                    color: rgb(0, 119, 255);
+                    text-decoration: underline;
                 }
             }
         }

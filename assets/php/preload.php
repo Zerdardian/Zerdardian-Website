@@ -3,6 +3,7 @@
     session_start();
     // Load base
     $base = $_SERVER['CONTEXT_DOCUMENT_ROOT'];
+    $url  = $_SERVER['HTTP_HOST'];
     $dotenv = Dotenv::createImmutable($base);
     $dotenv->load();
 
