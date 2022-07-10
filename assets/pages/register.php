@@ -1,3 +1,8 @@
+<?php
+if(!empty($_SESSION['user']['acc'])) {
+    header('location: /user/dashboard');
+}
+?>
 <div class="registerpage account" id="page">
     <?php
     if (isset($error)) {

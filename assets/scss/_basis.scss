@@ -1,3 +1,14 @@
+@mixin flex-grid-items($cols) {
+    display: flex;
+    flex-wrap: wrap;
+  
+    > * {
+      $item-width: calc(100% / $cols);
+      width: $item-width;
+      box-sizing: border-box;
+    }
+  }
+
 body {
     .active {
         display: block;
@@ -52,5 +63,64 @@ body {
                 flex-flow: column;
             }
         }
+    }
+
+    div.items {
+        display: flex;
+
+        &.col {
+            flex-direction: column;
+            .item {
+                margin-top: 10px;
+            }
+        }
+        &.row-2 {
+            @include flex-grid-items(2)
+        }
+        &.row-3 {
+            @include flex-grid-items(3)
+        }
+        &.row-4 {
+            @include flex-grid-items(4)
+        }
+    }
+
+    div#systemdiv {
+        width: 75%;
+        min-height: 50px;
+
+        position: fixed;
+
+        bottom: 10px;
+        left: 12.5%;
+        right: 12.5%;
+
+        border-radius: 20px;
+        opacity: 0;
+        text-align: center;
+        padding-top: 10px;
+        transition: 0.25s;
+
+        &.active {
+            opacity: 1;
+        }
+
+        &.succes {
+            background-color: rgb(107, 178, 1);
+            color: white;
+        }
+
+        &.error {
+            background-color: red;
+            color: white;
+        }
+    }
+
+    p.disclaimer {
+        padding: 10px;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        font-size: 10px;
     }
 }

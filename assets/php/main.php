@@ -1,10 +1,6 @@
 <?php
 if (empty($error)) {
-    if(!empty($_SESSION['user']['acc'])) {
-        $username = $_SESSION['user']['acc']['username'];
-        $userid = $_SESSION['user']['acc']['userid'];
-        $email = $_SESSION['user']['acc']['email'];
-        
+    if(!empty($_SESSION['user']['acc'])) {        
         $select = $conn->query("SELECT userid, username, email FROM users WHERE `userid`='$userid'")->fetch();
         if(empty($select)) {
             header('location: /logout');

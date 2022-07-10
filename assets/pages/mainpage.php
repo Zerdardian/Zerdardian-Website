@@ -43,4 +43,5 @@ $diff = date_diff(date_create($dateOfBirth), date_create($today));
         <div class="headerending">
         </div>
     </div>
+    <?=include_once "./assets/pages/mainpage/party.php"?>
 </div>

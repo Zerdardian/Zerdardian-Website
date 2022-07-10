@@ -24,61 +24,67 @@
         } else {
             $setting = 'home';
         }
+
         if ($item == 'dashboard') {
             if (empty($_SESSION['user']['acc'])) {
                 header('location: /login');
             }
             if (file_exists("./assets/pages/dashboard/$setting.php")) {
+                $user = $conn->query("SELECT * FROM users INNER JOIN userinfo INNER JOIN settings WHERE users.userid = '$userid'")->fetch();
         ?>
                 <div id="dashheader">
                     <div class="dashbackground"></div>
-                    <div class="dashinfo">
-                        <div class="username">
-                            <div class="text">
-                                <?=$username?>
+                    <div class="dashheadinfo">
+                        <div class="dashinfo">
+                            <div class="username">
+                                <div class="text displayusername">
+                                    <?= $user['displayname'] ?>
+                                </div>
+                            </div>
+                            <div class="profilepicture">
+                                <div class="image">
+                                    <img src="<?=$profilepicture?>" alt="Profile Icon">
+                                </div>
                             </div>
                         </div>
-                        <div class="profilepicture">
-                            <div class="image">
-                                <img src="http://ddragon.leagueoflegends.com/cdn/12.12.1/img/profileicon/588.png" alt="Profile Icon">
-                            </div>
+                        <div class="dashmenu" data-item="<?= $setting ?>">
+                            <a href="/user/dashboard">
+                                <div class="item" data-item="home">
+                                    Home
+                                </div>
+                            </a>
+                            <a href="/user/dashboard/connections">
+                                <div class="item" data-item="connections">
+                                    Connections
+                                </div>
+                            </a>
+                            <a href="/user/dashboard/messages">
+                                <div class="item" data-item="messages">
+                                    Messages
+                                </div>
+                            </a>
+                            <a href="/user/dashboard/settings">
+                                <div class="item" data-item="settings">
+                                    Settings
+                                </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="dashmenu">
-                        <a href="/user/dashboard/">
-                            <div class="item">
-                                Home
-                            </div>
-                        </a>
-                        <a href="/user/dashboard/connections">
-                            <div class="item">
-                                Connections
-                            </div>
-                        </a>
-                        <a href="/user/dashboard/messages">
-                            <div class="item">
-                                Messages
-                            </div>
-                        </a>
-                        <a href="/user/dashboard/settings">
-                            <div class="item">
-                                Settings
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            <?php
-                include_once "./assets/pages/dashboard/$setting.php";
-            } else {
-            ?>
+                </div><?php
+                        include_once "./assets/pages/dashboard/$setting.php";
+                    } else {
+                        ?>
                 <div class="notfound error">
                     <h1>Pagina niet gevonden!</h1>
                     <p>De volgende pagina waar je naar zocht, bestaat niet, is ooit verwijderd of er is iets fout gegaan aan mijn kant! Keer terug naar de <a href="/user/dashboard">dashboard</a> pagina</p>
                 </div>
     <?php
-            }
-        } else {
-            echo str_replace('.php', '', $_GET['two']);
-        }
-    } ?>
+                    }
+                } else {
+                    $targetuser = str_replace('.php', '', $_GET['two']);
+                    if ($targetuser == $username) {
+                        header('location: /user/dashboard');
+                    }
+                }
+            } ?>
 </div>

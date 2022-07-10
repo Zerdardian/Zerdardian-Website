@@ -7,12 +7,178 @@ div#dashboard.user {
 
     div#dashheader {
         width: 100%;
-        height: 250px;
-
+        height: 350px;
         background-color: white;
+        position: relative;
+
+        div.dashbackground {
+            width: 100%;
+            height: 300px;
+
+            background-color: whitesmoke;
+            position: relative;
+        }
+
+        div.dashheadinfo {
+            width: 100%;
+            height: 50px;
+
+            display: block;
+            position: relative;
+
+            div.dashinfo {
+                width: 100%;
+                height: 100%;
+
+                div.username {
+                    position: absolute;
+                    bottom: 75px;
+                    right: 190px;
+
+                    transform: rotate(-34deg);
+                }
+
+                div.profilepicture {
+                    width: 150px;
+                    height: 150px;
+
+                    position: absolute;
+
+                    right: 100px;
+                    top: -30px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
+                }
+            }
+
+            div.dashmenu {
+                display: flex;
+                position: absolute;
+
+                top: 0;
+                left: 0;
+
+                flex-direction: row;
+                flex-wrap: wrap;
+                flex-basis: 4;
+
+                a {
+                    text-decoration: none;
+                    color: black;
+
+                    div.item {
+                        width: 150px;
+                        height: 50px;
+                        text-align: center;
+                    }
+                }
+
+                &[data-item=home] {
+                    a {
+                        div.item[data-item=home] {
+                            background-color: rgb(12, 17, 255);
+                            color: white;
+                        }
+                    }
+                }
+
+                &[data-item=connections] {
+                    a {
+                        div.item[data-item=connections] {
+                            background-color: rgb(12, 17, 255);
+                            color: white;
+                        }
+                    }
+                }
+
+                &[data-item=messages] {
+                    a {
+                        div.item[data-item=messages] {
+                            background-color: rgb(12, 17, 255);
+                            color: white;
+                        }
+                    }
+                }
+
+                &[data-item=settings] {
+                    a {
+                        div.item[data-item=settings] {
+                            background-color: rgb(12, 17, 255);
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
-    div.empty.emptyacc, div.notfound.error {
+    div.settings {
+        color: white;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    div#connections {
+        padding-left: 10px;
+        padding-right: 10px;
+        button#luser {
+            width: 75%;
+            max-width: 100%;
+
+            height: 150px;
+            position: relative;
+            margin: auto auto;
+
+            .image {
+                width: 150px;
+                height: 150px;
+
+                position: absolute;
+                right: 0;
+                top: 0;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+
+                    border-radius: 20px;
+                }
+            }
+            .username {
+                text-align: left;
+                padding-left: 10px;
+            }
+
+            .level {
+                text-align: left;
+                padding-left: 10px;
+            }
+        }
+
+        .error {
+            width: 75%;
+            height: 100px;
+
+            background-color: red;
+
+            position: relative;
+            margin: auto auto;
+            border-radius: 20px;
+
+            .message {
+                text-align: center;
+                color: white;
+            }
+        }
+    }
+
+    div.empty.emptyacc,
+    div.notfound.error {
         width: 75%;
         height: 100%;
 

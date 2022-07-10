@@ -13,7 +13,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
     <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+    <script src="/assets/js/scripts/require.js"></script>
     <link rel="stylesheet" type='text/css' href="/assets/css/app.css">
+    <link rel="stylesheet" type='text/css' href="/node_modules/@claviska/jquery-minicolors/jquery.minicolors.css">
+    <!-- <script src="/node_modules/@claviska/jquery-minicolors/jquery.minicolors.min.js"></script> -->
     <title><?= $pagetitle ?></title>
 </head>
 
@@ -68,7 +71,7 @@
                         ?>
                             <a href="/user/<?= $username ?>/">
                                 <div class="image">
-                                    <img src="http://ddragon.leagueoflegends.com/cdn/12.12.1/img/profileicon/588.png" alt="Profile Icon">
+                                    <img src="<?=$profilepicture?>" alt="Profile Icon">
                                 </div>
                             </a>
 

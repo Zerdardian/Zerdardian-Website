@@ -123,11 +123,12 @@ function get_gravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts 
  * Function InsertLeagueUsername.
  * The ability to add a user to the database with they username to have the ability to not touch the api that often. Only when required.
  * @param string $username 'Username of your league account!'
+ * @param string $region 'Check for avalable platform, or well in this case, regions the player plays!'
  * @return 'Succesful on adding the username or return a false statement'
  */
-function InsertLeagueUsername(string $username) # Finished, Adding user to database or updating the user if requested!
+function InsertLeagueUsername(string $username, string $region) # Finished, Adding user to database or updating the user if requested!
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -137,7 +138,6 @@ function InsertLeagueUsername(string $username) # Finished, Adding user to datab
         $error['msg'] = $e->getMessage();
     }
 
-    $region = 'euw1';
     if (empty($username)) $username = $_ENV['LEAGUEUSER'];
     $apikey = "?api_key=" . $_ENV['RIOT_API_KEY'];
     $context = stream_context_create(['http' => ['ignore_errors' => true]]);
@@ -156,7 +156,8 @@ function InsertLeagueUsername(string $username) # Finished, Adding user to datab
         $data['summonerlevel'] = $response->summonerLevel;
         $check = $conn->query("SELECT * FROM leagueprofile WHERE `leagueId` = '" . $data['id'] . "'")->fetch();
         if (empty($check)) {
-            $insert = $conn->prepare("INSERT INTO `leagueprofile` (`leagueId`, `accountId`, `profileIconId`, `name`, `puuId`, `summonerLevel`) VALUES (:leagueid,:accountid,:profileiconid,:name,:puuid,:summonerlevel)");
+            $insert = $conn->prepare("INSERT INTO `leagueprofile` (`region`, `leagueId`, `accountId`, `profileIconId`, `name`, `puuId`, `summonerLevel`) VALUES (:region, :leagueid,:accountid,:profileiconid,:name,:puuid,:summonerlevel)");
+            $insert->bindParam(':region', $region, PDO::PARAM_STR);
             $insert->bindParam(':leagueid', $data['id'], PDO::PARAM_STR);
             $insert->bindParam(':accountid', $data['accountid'], PDO::PARAM_STR);
             $insert->bindParam(':profileiconid', $data['profileiconid'], PDO::PARAM_STR);
@@ -177,6 +178,8 @@ function InsertLeagueUsername(string $username) # Finished, Adding user to datab
     }
 
     if ($data['code'] == 404) {
+        $data['error'] = true;
+        $data['type'] = 'NOUSR';
         $data['message'] = "There is no League account assosiated with this region, try again!";
         return $data;
     }
@@ -186,11 +189,12 @@ function InsertLeagueUsername(string $username) # Finished, Adding user to datab
  * Function InsertLeaguePuuid.
  * The ability to add a user to the database with they puuid to insure you don't have to use the api that often.
  * @param string $puuid 'Users Puuid! Can be recieved with the function above or with matches'
+ * @param string $region 'Check for avalable platform, or well in this case, regions the player plays!'
  * @return 'Succesful adding the user to the database'
  */
-function InsertLeaguePuuId(string $puuid) # Finished and mostly copied over from Username. Same deal as before
+function InsertLeaguePuuId(string $puuid, string $region) # Finished and mostly copied over from Username. Same deal as before
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -200,7 +204,6 @@ function InsertLeaguePuuId(string $puuid) # Finished and mostly copied over from
         $error['msg'] = $e->getMessage();
     }
 
-    $region = 'euw1';
     $apikey = "?api_key=" . $_ENV['RIOT_API_KEY'];
     $context = stream_context_create(['http' => ['ignore_errors' => true]]);
     $response = json_decode(file_get_contents("https://$region.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/$puuid" . $apikey, false, $context));
@@ -217,7 +220,8 @@ function InsertLeaguePuuId(string $puuid) # Finished and mostly copied over from
         $data['summonerlevel'] = $response->summonerLevel;
         $check = $conn->query("SELECT * FROM leagueprofile WHERE `leagueId` = '" . $data['id'] . "'")->fetch();
         if (empty($check)) {
-            $insert = $conn->prepare("INSERT INTO `leagueprofile` (`leagueId`, `accountId`, `profileIconId`, `name`, `puuId`, `summonerLevel`) VALUES (:leagueid,:accountid,:profileiconid,:name,:puuid,:summonerlevel)");
+            $insert = $conn->prepare("INSERT INTO `leagueprofile` (`region`, `leagueId`, `accountId`, `profileIconId`, `name`, `puuId`, `summonerLevel`) VALUES (:region, :leagueid,:accountid,:profileiconid,:name,:puuid,:summonerlevel)");
+            $insert->bindParam(':region', $region, PDO::PARAM_STR);
             $insert->bindParam(':leagueid', $data['id'], PDO::PARAM_STR);
             $insert->bindParam(':accountid', $data['accountid'], PDO::PARAM_STR);
             $insert->bindParam(':profileiconid', $data['profileiconid'], PDO::PARAM_STR);
@@ -238,6 +242,8 @@ function InsertLeaguePuuId(string $puuid) # Finished and mostly copied over from
     }
 
     if ($data['code'] == 404) {
+        $data['error'] = true;
+        $data['type'] = 'NOUSR';
         $data['message'] = "There is no League account assosiated with this region, try again!";
         return $data;
     }
@@ -252,7 +258,7 @@ function InsertLeaguePuuId(string $puuid) # Finished and mostly copied over from
 
 function insertLeagueMatch(string $puuid, int $max) # Finished, loading Player info and match info if required!
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
 
     // Db connection
     try {
@@ -294,7 +300,7 @@ function insertLeagueMatch(string $puuid, int $max) # Finished, loading Player i
 
                 if ($data['code'] == 200) {
                     foreach ($played[$number]['full']->metadata->participants as $user) {
-                        $player = getLeaguePuuid($user);
+                        $player = getLeaguePuuid($user, $region);
                         $game[$number]['users'][$pnumber]['info'] = $player;
                         $game[$number]['users'][$pnumber]['stats'] = $played[$number]['full']->info->participants[$pnumber];
 
@@ -376,7 +382,7 @@ function insertLeagueMatch(string $puuid, int $max) # Finished, loading Player i
  */
 function insertMasteryChampions(string $encSumid)
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
 
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
@@ -421,9 +427,9 @@ function insertMasteryChampions(string $encSumid)
  * @param string $username 'Use a username that you want to find, returns a error if empty'
  * @return 'You got yourself a user! Returns a error if not avalable'
  */
-function getLeagueUser(string $username) # Finished, Select user from Database.
+function getLeagueUser(string $username, string $region) # Finished, Select user from Database.
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
 
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
@@ -439,9 +445,17 @@ function getLeagueUser(string $username) # Finished, Select user from Database.
 
     $user = $conn->query("SELECT * FROM leagueprofile WHERE `name`='$username' LIMIT 1")->fetch();
     if (empty($user)) {
-        $check = InsertLeagueUsername($username);
+        $check = InsertLeagueUsername($username, $region);
         if ($check['code'] = 200) {
+            if($check['type'] == 'NOUSR') {
+                $data['error'] = true;
+                $data['type'] = "NOUSR";
+                $data['message'] = "No user found in this region.";
+                return $data;
+            }
             $user = $conn->query("SELECT * FROM leagueprofile WHERE `name`='$username' LIMIT 1")->fetch();
+            $data['error'] = false;
+            $data['type'] = "USRFND";
             $data['id'] = $user['leagueId'];
             $data['accountid'] = $user['accountId'];
             $data['profileiconid'] = $user['profileIconId'];
@@ -453,8 +467,12 @@ function getLeagueUser(string $username) # Finished, Select user from Database.
         if ($check['code'] = 404) {
             $data['code'] = 404;
             $data['type'] = "NOUSR";
+            $data['message'] = "No user found in this region.";
+
         }
     } else {
+        $data['error'] = false;
+        $data['type'] = "USRFND";
         $data['id'] = $user['leagueId'];
         $data['accountid'] = $user['accountId'];
         $data['profileiconid'] = $user['profileIconId'];
@@ -471,9 +489,9 @@ function getLeagueUser(string $username) # Finished, Select user from Database.
  * @param string $puuid 'Use a puuid to get yourself started, returns an error if it is not an puuid or nonexistant.'
  * @return 'You got yourself a user! Returns an error if not avalable.'
  */
-function getLeaguePuuid(string $puuid) # Finished, Select user from Database otherwise, create
+function getLeaguePuuid(string $puuid, string $region) # Finished, Select user from Database otherwise, create
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
 
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
@@ -488,10 +506,18 @@ function getLeaguePuuid(string $puuid) # Finished, Select user from Database oth
 
     $user = $conn->query("SELECT * FROM leagueprofile WHERE `puuid`='$puuid' LIMIT 1")->fetch();
     if (empty($user)) {
-        $check = InsertLeaguePuuId($puuid);
+        $check = InsertLeaguePuuId($puuid, $region);
 
         if ($check['code'] = 200) {
+            if($check['type'] == 'NOUSR') {
+                $data['error'] = true;
+                $data['type'] = "NOUSR";
+                $data['message'] = "No user found in this region.";
+                return $data;
+            }
             $user = $conn->query("SELECT * FROM leagueprofile WHERE `puuid`='$puuid' LIMIT 1")->fetch();
+            $data['error'] = false;
+            $data['type'] = "USRFND";
             $data['id'] = $user['leagueId'];
             $data['accountid'] = $user['accountId'];
             $data['profileiconid'] = $user['profileIconId'];
@@ -505,6 +531,8 @@ function getLeaguePuuid(string $puuid) # Finished, Select user from Database oth
             $data['type'] = "NOUSR";
         }
     } else {
+        $data['error'] = false;
+        $data['type'] = "USRFND";
         $data['id'] = $user['leagueId'];
         $data['accountid'] = $user['accountId'];
         $data['profileiconid'] = $user['profileIconId'];
@@ -522,7 +550,7 @@ function getLeaguePuuid(string $puuid) # Finished, Select user from Database oth
  */
 function getMasteryChampions(string $encSumid)
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
 
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
@@ -551,7 +579,7 @@ function getMasteryChampions(string $encSumid)
 // Select all the champions that League has and future champions as well!
 function selectAllChampions()
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
 
     $versions = json_decode(file_get_contents("https://ddragon.leagueoflegends.com/api/versions.json"));
     $version = $versions[0];
@@ -579,7 +607,7 @@ function selectAllChampions()
  */
 function getMasteryChampion(string $encSumid, int $championid)
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
 
     try {
         $conn = new PDO('mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
@@ -605,7 +633,7 @@ function getMasteryChampion(string $encSumid, int $championid)
 
 function getRankUser($encSumid)
 {
-    if (empty($_ENV['RIOT_APIKEY'])) return;
+    if (empty($_ENV['RIOT_API_KEY'])) return;
 
     $region = 'euw1';
     if (empty($encSumid)) return;

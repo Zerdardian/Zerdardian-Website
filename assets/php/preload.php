@@ -26,3 +26,10 @@
     }
 
     $pagetitle = "Zerdardian";
+
+    if (!empty($_SESSION['user']['acc'])) {
+        $username = $_SESSION['user']['acc']['username'];
+        $userid = $_SESSION['user']['acc']['userid'];
+        $email = $_SESSION['user']['acc']['email'];
+        $profilepicture = "http://ddragon.leagueoflegends.com/cdn/12.12.1/img/profileicon/588.png";
+    }

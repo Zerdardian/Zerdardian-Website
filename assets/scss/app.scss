@@ -9,14 +9,6 @@ $color--maintext: rgb(0, 0, 0);
 $color--alttext: "";
 $color--altalttext: "";
 
-@import "header";
-@import "basis";
-@import "mainpage";
-@import "footer";
-@import "account";
-@import "user";
-
-
 body {
     padding: 0;
     margin: 0;
@@ -38,20 +30,15 @@ body {
             height: 100%;
         }
     }
-
-    div.accverified {
-        width: 75%;
-
-        background-color: white;
-
-        margin: auto auto;
-        padding: 50px;
-        padding-top: 10px;
-        margin-top: 50px;
-        border-radius: 50px;
-        text-align: center;
-    }
 }
+
+@import "header";
+@import "basis";
+@import "mainpage";
+@import "footer";
+@import "account";
+@import "user";
+@import "leagueuser";
 
 @keyframes DisplayItems {
     0% {

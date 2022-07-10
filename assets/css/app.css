@@ -1,3 +1,24 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: rgb(96, 96, 96);
+}
+body div#main {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}
+body div#main div.mainpage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 body div#main header#header {
   width: 100%;
   z-index: 100;
@@ -174,10 +195,74 @@ body .displayblock .block.col {
   flex-basis: 2;
   flex-flow: column;
 }
+body div.items {
+  display: flex;
+}
+body div.items.col {
+  flex-direction: column;
+}
+body div.items.col .item {
+  margin-top: 10px;
+}
+body div.items.row-2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+body div.items.row-2 > * {
+  width: 50%;
+  box-sizing: border-box;
+}
+body div.items.row-3 {
+  display: flex;
+  flex-wrap: wrap;
+}
+body div.items.row-3 > * {
+  width: 33.3333333333%;
+  box-sizing: border-box;
+}
+body div.items.row-4 {
+  display: flex;
+  flex-wrap: wrap;
+}
+body div.items.row-4 > * {
+  width: 25%;
+  box-sizing: border-box;
+}
+body div#systemdiv {
+  width: 75%;
+  min-height: 50px;
+  position: fixed;
+  bottom: 10px;
+  left: 12.5%;
+  right: 12.5%;
+  border-radius: 20px;
+  opacity: 0;
+  text-align: center;
+  padding-top: 10px;
+  transition: 0.25s;
+}
+body div#systemdiv.active {
+  opacity: 1;
+}
+body div#systemdiv.succes {
+  background-color: rgb(107, 178, 1);
+  color: white;
+}
+body div#systemdiv.error {
+  background-color: red;
+  color: white;
+}
+body p.disclaimer {
+  padding: 10px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 10px;
+}
 
 #main .mainpage div.main#headerpage {
   position: relative;
   height: 600px;
+  margin-bottom: 350px;
 }
 #main .mainpage div.main#headerpage .headeritem {
   position: relative;
@@ -233,11 +318,12 @@ body .displayblock .block.col {
 }
 #main .mainpage div.main#headerpage .block {
   width: 100%;
-  min-height: 50px;
+  height: 300px;
   background-color: white;
   display: flex;
   flex-direction: column;
   margin-top: -70px;
+  position: relative;
 }
 #main .mainpage div.main#headerpage .block .item {
   display: flex;
@@ -266,6 +352,103 @@ body .displayblock .block.col {
   height: 50px;
   background-color: white;
   border-bottom-right-radius: 20px;
+  position: relative;
+  margin-bottom: 50px;
+}
+#main .mainpage div#party.minigame {
+  width: 80%;
+  height: 250px;
+  background-color: white;
+  position: relative;
+  display: block;
+  border-radius: 20px;
+  margin: auto auto;
+  margin-bottom: 20px;
+}
+#main .mainpage div#party.minigame div.board {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 150px;
+  overflow: hidden;
+}
+#main .mainpage div#party.minigame div.board.none div.space {
+  transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(0px) skewX(0deg) skewY(0deg);
+}
+#main .mainpage div#party.minigame div.board.none div.space div.player {
+  width: 45px;
+  height: 45px;
+  position: relative;
+  background-size: 100%;
+  border-radius: 20px;
+  transition: 0.3s;
+  opacity: 0;
+}
+#main .mainpage div#party.minigame div.board.none div.space div.player.disapearmove {
+  opacity: 0;
+  transition: 1s;
+}
+#main .mainpage div#party.minigame div.board.none div.space div.player.appear {
+  opacity: 1;
+  transition: 1s;
+}
+#main .mainpage div#party.minigame div.board.none div.space div.player.display {
+  opacity: 1;
+}
+#main .mainpage div#party.minigame div.board div.space {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 75px;
+  margin-left: 50px;
+  transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(59deg) rotateY(0deg) rotateZ(32deg) translateX(0px) translateY(0px) translateZ(0px) skewX(0deg) skewY(0deg);
+}
+#main .mainpage div#party.minigame div.board div.space .player {
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+#main .mainpage div#party.minigame div.board div.space:hover div.player {
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+}
+#main .mainpage div#party.minigame div.board div.space.start {
+  background-image: url("https://wereldvlaggen.nl/wp-content/uploads/2019/08/Chequered-Black-white-1.png");
+  width: 125px;
+  height: 125px;
+}
+#main .mainpage div#party.minigame div.board div.space.red {
+  background-color: red;
+}
+#main .mainpage div#party.minigame div.board div.space.blue {
+  background-color: blue;
+}
+#main .mainpage div#party.minigame div.board div.space.question {
+  background-color: lime;
+}
+#main .mainpage div#party.minigame div.board div.space.luck {
+  background-color: purple;
+}
+#main .mainpage div#party.minigame div.board div.space.unluck {
+  background-color: rgb(135, 0, 0);
+}
+#main .mainpage div#party.minigame div.diceblock {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
 }
 
 body div#main div.account {
@@ -296,10 +479,10 @@ body div#main div.account #error .message {
 body div#main div.account div#mainarea {
   width: 75%;
   height: 500px;
-  margin-top: 50px;
   padding-top: 10px;
   background-color: white;
   margin: auto auto;
+  margin-top: 50px;
   border-radius: 20px;
 }
 body div#main div.account div#mainarea form {
@@ -359,50 +542,6 @@ body div#main div.noacc a:hover {
   color: rgb(0, 119, 255);
   text-decoration: underline;
 }
-
-div#dashboard.user {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  margin: auto auto;
-}
-div#dashboard.user div#dashheader {
-  width: 100%;
-  height: 250px;
-  background-color: white;
-}
-div#dashboard.user div.empty.emptyacc, div#dashboard.user div.notfound.error {
-  width: 75%;
-  height: 100%;
-  position: relative;
-  display: block;
-  margin: auto auto;
-  background-color: white;
-  padding: 30px;
-  margin-top: 50px;
-  border-radius: 20px;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-  background-color: rgb(96, 96, 96);
-}
-body div#main {
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: auto;
-}
-body div#main div.mainpage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
 body div.accverified {
   width: 75%;
   background-color: white;
@@ -412,6 +551,147 @@ body div.accverified {
   margin-top: 50px;
   border-radius: 50px;
   text-align: center;
+}
+
+div#dashboard.user {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto auto;
+}
+div#dashboard.user div#dashheader {
+  width: 100%;
+  height: 350px;
+  background-color: white;
+  position: relative;
+}
+div#dashboard.user div#dashheader div.dashbackground {
+  width: 100%;
+  height: 300px;
+  background-color: whitesmoke;
+  position: relative;
+}
+div#dashboard.user div#dashheader div.dashheadinfo {
+  width: 100%;
+  height: 50px;
+  display: block;
+  position: relative;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashinfo {
+  width: 100%;
+  height: 100%;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashinfo div.username {
+  position: absolute;
+  bottom: 75px;
+  right: 190px;
+  transform: rotate(-34deg);
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashinfo div.profilepicture {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  right: 100px;
+  top: -30px;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashinfo div.profilepicture img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashmenu {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-basis: 4;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashmenu a {
+  text-decoration: none;
+  color: black;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashmenu a div.item {
+  width: 150px;
+  height: 50px;
+  text-align: center;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashmenu[data-item=home] a div.item[data-item=home] {
+  background-color: rgb(12, 17, 255);
+  color: white;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashmenu[data-item=connections] a div.item[data-item=connections] {
+  background-color: rgb(12, 17, 255);
+  color: white;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashmenu[data-item=messages] a div.item[data-item=messages] {
+  background-color: rgb(12, 17, 255);
+  color: white;
+}
+div#dashboard.user div#dashheader div.dashheadinfo div.dashmenu[data-item=settings] a div.item[data-item=settings] {
+  background-color: rgb(12, 17, 255);
+  color: white;
+}
+div#dashboard.user div.settings {
+  color: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+div#dashboard.user div#connections {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+div#dashboard.user div#connections button#luser {
+  width: 75%;
+  max-width: 100%;
+  height: 150px;
+  position: relative;
+  margin: auto auto;
+}
+div#dashboard.user div#connections button#luser .image {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+div#dashboard.user div#connections button#luser .image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+div#dashboard.user div#connections button#luser .username {
+  text-align: left;
+  padding-left: 10px;
+}
+div#dashboard.user div#connections button#luser .level {
+  text-align: left;
+  padding-left: 10px;
+}
+div#dashboard.user div#connections .error {
+  width: 75%;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  margin: auto auto;
+  border-radius: 20px;
+}
+div#dashboard.user div#connections .error .message {
+  text-align: center;
+  color: white;
+}
+div#dashboard.user div.empty.emptyacc,
+div#dashboard.user div.notfound.error {
+  width: 75%;
+  height: 100%;
+  position: relative;
+  display: block;
+  margin: auto auto;
+  background-color: white;
+  padding: 30px;
+  margin-top: 50px;
+  border-radius: 20px;
 }
 
 @-webkit-keyframes DisplayItems {
