@@ -35,7 +35,7 @@ $(document).ready(function () {
                         }, 10000)
                     }
 
-                    if(json.code == 200) {
+                    if (json.code == 200) {
                         dicethrow();
                     }
                 }
@@ -244,124 +244,27 @@ function canGame() {
     return "getGamepads" in navigator;
 }
 
-async function movePlayer(current, spaces, bg) {
-    bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
+async function message(message, type) {
+    var systemdiv = $('#systemdiv')
+    var systemmessage = $('#systemessage')
 
-    var current = parseInt(current);
-    var spaces = parseInt(spaces);
-
-    var currentspace = current;
-    var newspace = currentspace + spaces;
-
-    if (newspace == currentspace) return;
-
-    var newspacediv = $(`#mspace-${newspace}`);
-
-    $('.player').removeClass('display');
-    $('.player').addClass('disapearmove');
-    await delay(1000)
-
-    $('.player').remove();
-    await delay(100);
-
-    $(`<div class="player" style="background-image:url(${bg})"></div>`).appendTo(newspacediv);
-    await delay(100)
-    $('.player').addClass('appear');
-    await delay(1000);
-    $('.player').removeClass('appear');
-    $('.player').addClass('display');
-}
-
-async function dicethrow() {
-    var systemdiv = $('#systemdiv');
-    var currentspace = $('.player').parent();
-    var current = currentspace.attr('data-space');
-    var diceblock = $('.diceblock')
-
-    var numbers = [0, 1, 2, 3, 4, 5];
-    for (let index = 0; index < 20; index++) {
-        const randomnumber = numbers[Math.floor(Math.random() * numbers.length)];
-        $(diceblock).html(randomnumber);
-        await delay(100);
+    if (type = 1) {
+        systemdiv.addClass('succes')
+        systemdiv.removeClass('error')
     }
-    await delay(100);
-    const finalnumber = numbers[Math.floor(Math.random() * numbers.length)];
 
-    $(diceblock).html(finalnumber);
-    var bg = $('.player').css('background-image');
-    var currentspace = $('.player').parent();
-    var current = currentspace.attr('data-space');
+    if (type = 2) {
+        systemdiv.addClass('error')
+        systemdiv.removeClass('succes')
+    }
 
-    var data = [{
-        'function': 'do',
-        'dicethrow': true,
-        'dicenumber': finalnumber,
-        'lastspace': current
-    }]
-    $.ajax({
-        type: "POST",
-        url: "/assets/js/ajax/mainpage.php",
-        data: data[0],
-        success: async function (response) {
-            var json = JSON.parse(response);
-
-            if (json.code != 200) {
-                systemdiv.addClass('active');
-                systemdiv.addClass('error')
-
-                systemmessage.text(json.message)
-
-                timeout = setTimeout(() => {
-                    systemdiv.removeClass('active')
-                    systemdiv.removeClass('error')
-                    systemmessage.text('')
-                }, 10000)
-            }
-            if(json.code == 200) {
-                await movePlayer(current, finalnumber, bg);
-                await delay(1000);
-                await playEvent()
-            }
-        }
-    });
-}
-
-async function playEvent() {
-    var currentspace = $('.player').parent();
-    var current = currentspace.attr('data-space');
-
-    var data = [{
-        'function': 'do',
-        'spaceevent': true,
-        'currentspace': current
-    }]
-    $.ajax({
-        type: "POST",
-        url: "/assets/js/ajax/mainpage.php",
-        data: data[0],
-        success: async function (response) {
-            console.log(response);
-            return;
-            var json = JSON.parse(response);
-            console.log(json);
-
-            if (json.code != 200) {
-                systemdiv.addClass('active');
-                systemdiv.addClass('error')
-
-                systemmessage.text(json.message)
-
-                timeout = setTimeout(() => {
-                    systemdiv.removeClass('active')
-                    systemdiv.removeClass('error')
-                    systemmessage.text('')
-                }, 10000)
-            }
-            if(json.code == 200) {
-
-            }
-        }
-    });
+    systemdiv.addClass('active');
+    systemmessage.text(message);
+    delay(10000);
+    systemmessage.text('');
+    systemdiv.removeClass('active')
+    systemdiv.removeClass('succes')
+    systemdiv.removeClass('error')
 }
 
 function connectAccount(type, name, id, data) {

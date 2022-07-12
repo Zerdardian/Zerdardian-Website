@@ -5,5 +5,6 @@
     <footer id="footer"></footer>
 </div>
 <script src="/assets/js/basis.js"></script>
+<script src="/assets/js/party.js"></script>
 </body>
 </html>

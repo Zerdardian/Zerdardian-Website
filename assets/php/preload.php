@@ -33,3 +33,10 @@
         $email = $_SESSION['user']['acc']['email'];
         $profilepicture = "http://ddragon.leagueoflegends.com/cdn/12.12.1/img/profileicon/588.png";
     }
+
+
+    $files['party']['question'][] = "./assets/pages/mainpage/party/quest_1.html";
+    $files['party']['question'][] = "./assets/pages/mainpage/party/quest_2.html";
+    $files['party']['question'][] = "./assets/pages/mainpage/party/quest_3.html";
+    $files['party']['question'][] = "./assets/pages/mainpage/party/quest_4.html";
+    $files['party']['question'][] = "./assets/pages/mainpage/party/quest_5.html";
